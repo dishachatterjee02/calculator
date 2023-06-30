@@ -646,7 +646,7 @@ if ('vibrate' in navigator) {
     for (var i = 0; i < buttons.length; i++) {
       buttons[i].addEventListener('click', function() {
         // Vibrate the device for 100 milliseconds
-        navigator.vibrate(100);
+        navigator.vibrate(20);
       });
     }
 }
