@@ -636,3 +636,17 @@ function combination(n, r) {
         return combi;
     }
 }
+
+// Check if Vibration API is supported
+if ('vibrate' in navigator) {
+    // Get all the calculator buttons
+    var buttons = document.getElementsByClassName('box');
+    
+    // Attach a click event listener to each button
+    for (var i = 0; i < buttons.length; i++) {
+      buttons[i].addEventListener('click', function() {
+        // Vibrate the device for 100 milliseconds
+        navigator.vibrate(100);
+      });
+    }
+}
