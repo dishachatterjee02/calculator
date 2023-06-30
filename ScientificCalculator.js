@@ -520,6 +520,7 @@ const updateOutput = (value) => {
                 historyArray.push(currentValue);
             }
         } else {
+            historyArray.push(currentValue);
             currentValue = evaluateExpression(currentValue);
             historyArray.push(currentValue);
         }      
