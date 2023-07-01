@@ -113,6 +113,7 @@ const updateOutput = (value) => {
             clearCurrentValue = true;
         } else {
             currentValue = currentValue**3;
+            currentValue = shortenNumber(currentValue);
             historyArray.push(currentValue);
         }
     } else if(value === "x<sup><sup>2</sup></sup>") {
@@ -123,6 +124,7 @@ const updateOutput = (value) => {
             clearCurrentValue = true;
         } else {
             currentValue = currentValue**2;
+            currentValue = shortenNumber(currentValue);
             historyArray.push(currentValue);
         }
     } else if(value === "√") {
@@ -133,6 +135,7 @@ const updateOutput = (value) => {
             clearCurrentValue = true;
         } else {
             currentValue = Math.sqrt(currentValue);
+            currentValue = shortenNumber(currentValue);
             historyArray.push(currentValue);
         }
     } else if(value === "∛") {
@@ -143,6 +146,7 @@ const updateOutput = (value) => {
             clearCurrentValue = true;
         } else {
             currentValue = Math.cbrt(currentValue);
+            currentValue = shortenNumber(currentValue);
             historyArray.push(currentValue);
         }
     } else if(value === "<sup><sup>n</sup></sup>√") {
@@ -177,6 +181,7 @@ const updateOutput = (value) => {
         if(currentValue[0] === "0") {
             currentValue = currentValue.slice(1);
         }
+        currentValue = shortenNumber(currentValue);
         historyArray.push(currentValue);
     } else if(value === "nPr") {
         currentValue = eval(currentValue);
@@ -224,6 +229,7 @@ const updateOutput = (value) => {
         if(currentValue.includes("^")) {   // for nth exponents
             num = currentValue.replace("^", "**");
             currentValue = eval(num);
+            currentValue = shortenNumber(currentValue);
             historyArray.push(currentValue);
         } else if(currentValue.includes("√")) {   // for nth root
             n = currentValue.substring(0, currentValue.indexOf("√"));
@@ -234,28 +240,33 @@ const updateOutput = (value) => {
             if(currentValue%1 === 0) {   // in order remove trailing zeroes after '.'
                 currentValue = parseInt(currentValue);
             }
+            currentValue = shortenNumber(currentValue);
             historyArray.push(currentValue);
         } else if(currentValue.includes("log(")) {   // for log
             currentValue = eval(`Math.${currentValue}/Math.log(10)`).toFixed(3);
             if(currentValue%1 === 0) {   // in order remove trailing zeroes after '.'
                 currentValue = parseInt(currentValue);
             }
+            currentValue = shortenNumber(currentValue);
             historyArray.push(currentValue);
         } else if(currentValue.includes("ln(")) {   // for natural log
             currentValue = currentValue.replace("ln(", "log(");
             currentValue = eval(`Math.${currentValue}`);
+            currentValue = shortenNumber(currentValue);
             historyArray.push(currentValue);
         } else if(currentValue.includes("P")) {   // for nPr
             n = currentValue.substring(0, currentValue.indexOf("P"));
             r = currentValue.substring(currentValue.lastIndexOf("P") + 1);
             r = eval(r);
             currentValue = permutation(n, r);
+            currentValue = shortenNumber(currentValue);
             historyArray.push(currentValue);
         } else if(currentValue.includes("C")) {   // for nCr
             n = currentValue.substring(0, currentValue.indexOf("C"));
             r = currentValue.substring(currentValue.lastIndexOf("C") + 1);
             r = eval(r);
             currentValue = combination(n, r);
+            currentValue = shortenNumber(currentValue);
             historyArray.push(currentValue);
         } else if(currentValue.includes("sin(")) {   // for sin()
             if(MeasureOfAngle==="deg") {
