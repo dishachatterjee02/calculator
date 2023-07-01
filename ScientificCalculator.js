@@ -178,7 +178,7 @@ const updateOutput = (value) => {
             currentValue = currentValue.slice(1);
         }
         historyArray.push(currentValue);
-    } else if(value === "<sup><sup>n</sup></sup>P<sub><sub>r</sub></sub>") {
+    } else if(value === "nPr") {
         currentValue = eval(currentValue);
         if(isNaN(currentValue) || currentValue%1 !== 0) {
             historyArray.push(currentValue);
@@ -187,7 +187,7 @@ const updateOutput = (value) => {
         } else {
             currentValue = `${currentValue}P`;
         }
-    } else if(value === "<sup><sup>n</sup></sup>C<sub><sub>r</sub></sub>") {
+    } else if(value === "nCr") {
         currentValue = eval(currentValue);
         if(isNaN(currentValue) || currentValue%1 !== 0) {
             historyArray.push(currentValue);
@@ -266,6 +266,7 @@ const updateOutput = (value) => {
                 if(currentValue%1 === 0) {   // in order remove trailing zeroes after '.'
                     currentValue = parseInt(currentValue);
                 }
+                currentValue = shortenNumber(currentValue);
                 historyArray.push(currentValue);
             } else {
                 x = currentValue.substring(currentValue.lastIndexOf("n") + 1);   // extracts '(theeta)' from 'sin(theeta)'
@@ -275,6 +276,7 @@ const updateOutput = (value) => {
                 if(currentValue%1 === 0) {   // in order remove trailing zeroes after '.'
                     currentValue = parseInt(currentValue);
                 }
+                currentValue = shortenNumber(currentValue);
                 historyArray.push(currentValue);
             }
         } else if(currentValue.includes("cos(")) {   // for cos()
@@ -286,6 +288,7 @@ const updateOutput = (value) => {
                 if(currentValue%1 === 0) {   // in order remove trailing zeroes after '.'
                     currentValue = parseInt(currentValue);
                 }
+                currentValue = shortenNumber(currentValue);
                 historyArray.push(currentValue);
             } else {
                 x = currentValue.substring(currentValue.lastIndexOf("s") + 1);   // extracts '(theeta)' from 'cos(theeta)'
@@ -295,6 +298,7 @@ const updateOutput = (value) => {
                 if(currentValue%1 === 0) {   // in order remove trailing zeroes after '.'
                     currentValue = parseInt(currentValue);
                 }
+                currentValue = shortenNumber(currentValue);
                 historyArray.push(currentValue);
             }
         } else if(currentValue.includes("tan(")) {   // for tan()
@@ -310,6 +314,7 @@ const updateOutput = (value) => {
                     currentValue = "infinity";
                     clearCurrentValue = true;
                 }
+                currentValue = shortenNumber(currentValue);
                 historyArray.push(currentValue);
             } else {
                 x = currentValue.substring(currentValue.lastIndexOf("n") + 1);   // extracts '(theeta)' from 'tan(theeta)'
@@ -319,6 +324,7 @@ const updateOutput = (value) => {
                 if(currentValue%1 === 0) {   // in order remove trailing zeroes after '.'
                     currentValue = parseInt(currentValue);
                 }
+                currentValue = shortenNumber(currentValue);
                 historyArray.push(currentValue);
             }
         } else if(currentValue.includes("cosec(")) {   // for cosec()
@@ -334,6 +340,7 @@ const updateOutput = (value) => {
                     currentValue = "infinity";
                     clearCurrentValue = true;
                 }
+                currentValue = shortenNumber(currentValue);
                 historyArray.push(currentValue);
             } else {
                 x = currentValue.substring(currentValue.lastIndexOf("c") + 1);   // extracts '(theeta)' from 'cosec(theeta)'
@@ -343,6 +350,7 @@ const updateOutput = (value) => {
                 if(currentValue%1 === 0) {   // in order remove trailing zeroes after '.'
                     currentValue = parseInt(currentValue);
                 }
+                currentValue = shortenNumber(currentValue);
                 historyArray.push(currentValue);
             }
         } else if(currentValue.includes("sec(")) {   // for sec()
@@ -358,6 +366,7 @@ const updateOutput = (value) => {
                     currentValue = "infinity";
                     clearCurrentValue = true;
                 }
+                currentValue = shortenNumber(currentValue);
                 historyArray.push(currentValue);
             } else {
                 x = currentValue.substring(currentValue.lastIndexOf("c") + 1);   // extracts '(theeta)' from 'sec(theeta)'
@@ -367,6 +376,7 @@ const updateOutput = (value) => {
                 if(currentValue%1 === 0) {   // in order remove trailing zeroes after '.'
                     currentValue = parseInt(currentValue);
                 }
+                currentValue = shortenNumber(currentValue);
                 historyArray.push(currentValue);
             }
         } else if(currentValue.includes("cot(")) {   // for cot()
@@ -382,6 +392,7 @@ const updateOutput = (value) => {
                     currentValue = "0";
                     clearCurrentValue = true;
                 }
+                currentValue = shortenNumber(currentValue);
                 historyArray.push(currentValue);
             } else {
                 x = currentValue.substring(currentValue.lastIndexOf("t") + 1);   // extracts '(theeta)' from 'cot(theeta)'
@@ -391,6 +402,7 @@ const updateOutput = (value) => {
                 if(currentValue%1 === 0) {   // in order remove trailing zeroes after '.'
                     currentValue = parseInt(currentValue);
                 }
+                currentValue = shortenNumber(currentValue);
                 historyArray.push(currentValue);
             }
         } else if(currentValue.includes("sin<sup><sup>-1</sup></sup>(")) {   // for sin-1()
@@ -402,6 +414,7 @@ const updateOutput = (value) => {
                 if(currentValue%1 === 0) {   // in order remove trailing zeroes after '.'
                     currentValue = parseInt(currentValue);
                 }
+                currentValue = shortenNumber(currentValue);
                 historyArray.push(currentValue);
             } else {
                 x = currentValue.substring(currentValue.lastIndexOf("(") + 1);   // extracts '(value)' from 'sin-1(value)'
@@ -412,6 +425,7 @@ const updateOutput = (value) => {
                 if(currentValue%1 === 0) {   // in order remove trailing zeroes after '.'
                     currentValue = parseInt(currentValue);
                 }
+                currentValue = shortenNumber(currentValue);
                 historyArray.push(currentValue);
             }
         } else if(currentValue.includes("cos<sup><sup>-1</sup></sup>(")) {   // for cos-1()
@@ -423,6 +437,7 @@ const updateOutput = (value) => {
                 if(currentValue%1 === 0) {   // in order remove trailing zeroes after '.'
                     currentValue = parseInt(currentValue);
                 }
+                currentValue = shortenNumber(currentValue);
                 historyArray.push(currentValue);
             } else {
                 x = currentValue.substring(currentValue.lastIndexOf("(") + 1);   // extracts '(value)' from 'cos-1(value)'
@@ -433,6 +448,7 @@ const updateOutput = (value) => {
                 if(currentValue%1 === 0) {   // in order remove trailing zeroes after '.'
                     currentValue = parseInt(currentValue);
                 }
+                currentValue = shortenNumber(currentValue);
                 historyArray.push(currentValue);
             }
         } else if(currentValue.includes("tan<sup><sup>-1</sup></sup>(")) {   // for tan-1()
@@ -444,6 +460,7 @@ const updateOutput = (value) => {
                 if(currentValue%1 === 0) {   // in order remove trailing zeroes after '.'
                     currentValue = parseInt(currentValue);
                 }
+                currentValue = shortenNumber(currentValue);
                 historyArray.push(currentValue);
             } else {
                 x = currentValue.substring(currentValue.lastIndexOf("(") + 1);   // extracts '(value)' from 'tan-1(value)'
@@ -454,6 +471,7 @@ const updateOutput = (value) => {
                 if(currentValue%1 === 0) {   // in order remove trailing zeroes after '.'
                     currentValue = parseInt(currentValue);
                 }
+                currentValue = shortenNumber(currentValue);
                 historyArray.push(currentValue);
             }
         } else if(currentValue.includes("cosec<sup><sup>-1</sup></sup>(")) {   // for cosec-1()
@@ -465,6 +483,7 @@ const updateOutput = (value) => {
                 if(currentValue%1 === 0) {   // in order remove trailing zeroes after '.'
                     currentValue = parseInt(currentValue);
                 }
+                currentValue = shortenNumber(currentValue);
                 historyArray.push(currentValue);
             } else {
                 x = currentValue.substring(currentValue.lastIndexOf("(") + 1);   // extracts '(value)' from 'cosec-1(value)'
@@ -475,6 +494,7 @@ const updateOutput = (value) => {
                 if(currentValue%1 === 0) {   // in order remove trailing zeroes after '.'
                     currentValue = parseInt(currentValue);
                 }
+                currentValue = shortenNumber(currentValue);
                 historyArray.push(currentValue);
             }
         } else if(currentValue.includes("sec<sup><sup>-1</sup></sup>(")) {   // for sec-1()
@@ -486,6 +506,7 @@ const updateOutput = (value) => {
                 if(currentValue%1 === 0) {   // in order remove trailing zeroes after '.'
                     currentValue = parseInt(currentValue);
                 }
+                currentValue = shortenNumber(currentValue);
                 historyArray.push(currentValue);
             } else {
                 x = currentValue.substring(currentValue.lastIndexOf("(") + 1);   // extracts '(value)' from 'sec-1(value)'
@@ -496,6 +517,7 @@ const updateOutput = (value) => {
                 if(currentValue%1 === 0) {   // in order remove trailing zeroes after '.'
                     currentValue = parseInt(currentValue);
                 }
+                currentValue = shortenNumber(currentValue);
                 historyArray.push(currentValue);
             }
         } else if(currentValue.includes("cot<sup><sup>-1</sup></sup>(")) {   // for cot-1()
@@ -507,6 +529,7 @@ const updateOutput = (value) => {
                 if(currentValue%1 === 0) {   // in order remove trailing zeroes after '.'
                     currentValue = parseInt(currentValue);
                 }
+                currentValue = shortenNumber(currentValue);
                 historyArray.push(currentValue);
             } else {
                 x = currentValue.substring(currentValue.lastIndexOf("(") + 1);   // extracts '(value)' from 'cot-1(value)'
@@ -517,6 +540,7 @@ const updateOutput = (value) => {
                 if(currentValue%1 === 0) {   // in order remove trailing zeroes after '.'
                     currentValue = parseInt(currentValue);
                 }
+                currentValue = shortenNumber(currentValue);
                 historyArray.push(currentValue);
             }
         } else {
