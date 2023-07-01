@@ -71,16 +71,15 @@ const updateOutput = (value) => {
         // slice(0, -1) extracts a substring from the original string, starting from
         // the first character (0) and ending at the character before the last character (-1).
         currentValue = currentValue.slice(0, -1);
-    } else if(value === "x<sup><sup>-1</sup></sup>") {
+    } else if(value === "1/x") {
         currentValue = eval(currentValue);
         if(isNaN(currentValue)) {
             historyArray.push(currentValue);
             currentValue = "Error";
             clearCurrentValue = true;
-            console.log(clearCurrentValue);
         } else {
-            
             currentValue = 1/currentValue;
+            currentValue = shortenNumber(currentValue);
             historyArray.push(currentValue);
         }
     } else if(value === "!") {
@@ -89,6 +88,7 @@ const updateOutput = (value) => {
         // Check if the number is a positive integer
         if (num%1 === 0 && num >= 0) {
             currentValue = factorial(num);
+            currentValue = shortenNumber(currentValue);
             historyArray.push(currentValue);
         } else {
             // Show an error message if the input is invalid
@@ -641,22 +641,47 @@ function combination(n, r) {
 
 function shortenNumber(number) {
     number = Number(number);
-    if(number > 9999999999) {
-        const num = number.toFixed(3);
+    if(number > 999999999999999) {
+        return "Limit exceeded";
+    } else if(number > 9999999999) {
+        let num = number.toFixed(3);
+        num = removeTrailingZeroes(num);
         return num;
     } else if(number > 9999999) {
-        const num = number.toFixed(6);
+        let num = number.toFixed(6);
+        num = removeTrailingZeroes(num);
         return num;
     } else if(number > 9999) {
-        const num = number.toFixed(9);
+        let num = number.toFixed(9);
+        num = removeTrailingZeroes(num);
         return num;
     } else if(number > 9) {
-        const num = number.toFixed(12);
+        let num = number.toFixed(12);
+        num = removeTrailingZeroes(num);
         return num;
     } else {
-        const num = number.toFixed(13);
+        let num = number.toFixed(13);
+        num = removeTrailingZeroes(num);
         return num;
     }
+}
+
+function removeTrailingZeroes(number) {
+    const numberString = String(number);
+    const decimalIndex = numberString.indexOf('.');
+  
+    if (decimalIndex !== -1) {
+      let nonZeroIndex = numberString.length - 1;
+      while (numberString.charAt(nonZeroIndex) === '0') {
+        nonZeroIndex--;
+      }
+      if (numberString.charAt(nonZeroIndex) === '.') {
+        nonZeroIndex--; // Remove the decimal point if all following digits are zeroes
+      }
+      return numberString.slice(0, nonZeroIndex + 1);
+    }
+  
+    return numberString;
 }
 
 // Check if Vibration API is supported
