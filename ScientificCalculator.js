@@ -522,6 +522,7 @@ const updateOutput = (value) => {
         } else {
             historyArray.push(currentValue);
             currentValue = evaluateExpression(currentValue);
+            currentValue = shortenNumber(currentValue);
             historyArray.push(currentValue);
         }      
     } else if(value === "🕒") {
@@ -635,6 +636,26 @@ function combination(n, r) {
     } else {
         combi = factorial(n) / (factorial(r)*factorial(n-r));
         return combi;
+    }
+}
+
+function shortenNumber(number) {
+    number = Number(number);
+    if(number > 9999999999) {
+        const num = number.toFixed(3);
+        return num;
+    } else if(number > 9999999) {
+        const num = number.toFixed(6);
+        return num;
+    } else if(number > 9999) {
+        const num = number.toFixed(9);
+        return num;
+    } else if(number > 9) {
+        const num = number.toFixed(12);
+        return num;
+    } else {
+        const num = number.toFixed(13);
+        return num;
     }
 }
 
