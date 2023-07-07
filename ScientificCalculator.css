@@ -6,21 +6,45 @@
 
 body {
     position: relative;
-    height: 75vh; /* Adjust the height as needed */
+    height: 90vh; /* Adjust the height as needed */
 }
 
 @media only screen and (min-width: 700px) {
     .container {
-        min-width: 700px;
+        min-width: 690px;
         font-size: 1.5rem;
     }
     
 }
 
-@media only screen and (max-width: 699px) {
+@media only screen and (max-width: 700px) {
     .container {
         min-width: 96%;
         font-size: 1rem;
+    }
+}
+
+@media only screen and (min-height: 600px) {
+    #button-1 .knobs:before {
+        font-size: 1.1rem;
+        border-radius: 50%;
+        top: 0.38rem;
+        padding: 9px 4px;
+    }
+    .button {
+        height: 3rem;
+    }
+}
+
+@media only screen and (max-height: 600px) {
+    #button-1 .knobs:before {
+        font-size: 1rem;
+        border-radius: 50%;
+        top: 1px;
+        padding: 3.5px 3px;
+    }
+    .button {
+        height: 1.5rem;
     }
 }
 
@@ -102,7 +126,6 @@ body {
   
 .button {
     width: 90%;
-    height: 3rem;
     background-color: yellow;
     position: relative;
     box-shadow: 2px 2px 5px;
@@ -121,17 +144,13 @@ body {
 #button-1 .knobs:before {
     content: "deg";
     position: absolute;
-    top: 0.38rem;
     left: 0.4em;
     width: 1.93rem;
     color: #fff;
-    font-size: 1.1rem;
     font-weight: bold;
     text-align: center;
     line-height: 1;
-    padding: 9px 4px;
     background-color: #03a9f4;
-    border-radius: 50%;
     transition: 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
 }
 
