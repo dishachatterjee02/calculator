@@ -45,7 +45,7 @@
 .operands:hover{
     background-color: rgb(178, 215, 178);
     font-weight: bolder;
-    cursor: pointer;  /* makes hand icon on hovering */
+    cursor: pointer;  /* changes cursor icon to hand icon on hovering */
 }
 #box-2{
     grid-column: 1/3;
