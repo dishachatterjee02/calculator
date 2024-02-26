@@ -47,8 +47,6 @@ const evaluateExpression = (expression) => {
     // the meaning of ÷ and ×, as they were not written as / and * in HTML document.
     // To make make eval() parse their meaning, we have to first replace
     // ÷ symbol with / and × symbol with *, then give let the eval() evaluate the string.
-    // currentValue = currentValue.replace(/÷/g, '/').replace(/×/g, '*');
-    // return eval(currentValue);
     const evaluatedResult = eval(expression.replace(/÷/g, '/').replace(/×/g, '*'));
     return evaluatedResult;
 }
