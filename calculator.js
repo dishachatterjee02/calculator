@@ -24,7 +24,7 @@ const updateOutput = (value) =>{
         // the first character (0) and ending at the character before the last character (-1).
         currentValue = currentValue.slice(0, -1);
     } else if (value === "=") {
-        currentValue = evaluateExpression(currentValue);
+        currentValue = evaluateExpression(currentValue).toString();
     } else {
         if (currentValue === "0") {
         // Removing leading 0(0 on the leftmost value) if current value is "0"
@@ -47,8 +47,10 @@ const evaluateExpression = (expression) => {
     // the meaning of ÷ and ×, as they were not written as / and * in HTML document.
     // To make make eval() parse their meaning, we have to first replace
     // ÷ symbol with / and × symbol with *, then give let the eval() evaluate the string.
-    currentValue = currentValue.replace(/÷/g, '/').replace(/×/g, '*');
-    return eval(currentValue);
+    // currentValue = currentValue.replace(/÷/g, '/').replace(/×/g, '*');
+    // return eval(currentValue);
+    const evaluatedResult = eval(expression.replace(/÷/g, '/').replace(/×/g, '*'));
+    return evaluatedResult;
 }
 
 // Adding 'click' event listener to all buttons at once using for loop, to handle mouseclicks.
